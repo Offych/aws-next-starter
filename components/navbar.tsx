@@ -15,17 +15,17 @@ export default function Navbar() {
           <div className="hidden md:flex gap-1 ml-4">
             <Link href="/login" 
               className="text-muted-foreground hover:text-foreground transition-colors px-2 
-              py-1 rounded-md font-medium">Login</Link>
+              py-1 rounded-md font-medium">Login Page</Link>
             <Link href="/dashboard" 
               className="text-muted-foreground hover:text-foreground transition-colors px-2 
-              py-1 rounded-md font-medium">Dashboard</Link>
+              py-1 rounded-md font-medium">Dashboard Page</Link>
             <Link href="/not-found" 
               className="text-muted-foreground hover:text-foreground transition-colors px-2 
               py-1 rounded-md font-medium">404 page</Link>
           </div>
         </div>
         <div className="flex items-center gap-1">
-          <ModeToggle />
+          Mode Switcher <ModeToggle />
         </div>
       </div>
     </nav>
