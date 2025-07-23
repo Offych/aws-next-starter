@@ -1,7 +1,7 @@
 import Link from "next/link";
-import Image from "next/image";
 import { ModeToggle } from "@/components/dark-mode-toggle";
 import { ScreenShare } from "lucide-react";
+import SearchInput from "@/components/search-unput";
 
 export default function Navbar() {
   return (
@@ -13,18 +13,19 @@ export default function Navbar() {
             Development
           </Link>
           <div className="hidden md:flex gap-1 ml-4">
-            <Link href="/login" 
+            <Link href="/login"
               className="text-muted-foreground hover:text-foreground transition-colors px-2 
               py-1 rounded-md font-medium">Login Page</Link>
-            <Link href="/dashboard" 
+            <Link href="/dashboard"
               className="text-muted-foreground hover:text-foreground transition-colors px-2 
               py-1 rounded-md font-medium">Dashboard Page</Link>
-            <Link href="/not-found" 
+            <Link href="/not-found"
               className="text-muted-foreground hover:text-foreground transition-colors px-2 
               py-1 rounded-md font-medium">404 page</Link>
           </div>
         </div>
-        <div className="flex items-center gap-1">
+        <div className="flex items-center gap-1 text-sm">
+          <SearchInput />
           Mode Switcher <ModeToggle />
         </div>
       </div>
