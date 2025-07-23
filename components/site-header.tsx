@@ -1,4 +1,3 @@
-import { Button } from "@/components/ui/button"
 import { Separator } from "@/components/ui/separator"
 import { SidebarTrigger } from "@/components/ui/sidebar"
 
@@ -13,7 +12,7 @@ export function SiteHeader() {
         />
         <h1 className="text-base font-medium">Documents</h1>
         <div className="ml-auto flex items-center gap-2">
-           Let's make something awesome!
+           Let&apos;s make something awesome!
         </div>
       </div>
     </header>
