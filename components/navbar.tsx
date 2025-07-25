@@ -22,6 +22,9 @@ export default function Navbar() {
             <Link href="/not-found"
               className="text-muted-foreground hover:text-foreground transition-colors px-2 
               py-1 rounded-md font-medium">404 page</Link>
+            <Link href="/add-project/step-one"
+              className="text-muted-foreground hover:text-foreground transition-colors px-2 
+              py-1 rounded-md font-medium">Project Form</Link>
           </div>
         </div>
         <div className="flex items-center gap-1 text-sm">

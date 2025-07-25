@@ -1,4 +1,4 @@
-import { Input } from "./ui/input";
+import { Input } from "@/components/ui/input";
 import { Wand2 } from "lucide-react";
 
 export default function SearchInput() {
