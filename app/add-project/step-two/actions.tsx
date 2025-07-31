@@ -1,12 +1,11 @@
 'use server';
 
-import { stepOneSchema } from "@/lib/schemas";
+import { stepTwoSchema } from "@/lib/schemas";
 import { z } from "zod";
 
+export async function createProjectStepTwo(values: z.infer<typeof stepTwoSchema>) {
 
-export async function createProjectStepOne(values: z.infer<typeof stepOneSchema>) {
-  
-    const result = await stepOneSchema.safeParse(values);
+    const result = await stepTwoSchema.safeParse(values);
 
     if (!result.success) {
         return {
@@ -17,13 +16,13 @@ export async function createProjectStepOne(values: z.infer<typeof stepOneSchema>
 
     return {
         status: "success",
-        message: "Step one passed successfully",
+        message: "Step two passed successfully",
     }
     
 }
 
-export async function handleFormSubmit(values: z.infer<typeof stepOneSchema>) {
-    const result = await createProjectStepOne(values)
+export async function handleFormSubmit(values: z.infer<typeof stepTwoSchema>) {
+    const result = await createProjectStepTwo(values)
   
     if (result.status === "success") {
       return {

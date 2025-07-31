@@ -1,38 +1,86 @@
 'use client';
 
-import { FormInput } from "@/components/ui/form-input";
-import SubmitButton from "@/components/submit-button";
+import { useForm } from "react-hook-form";
+import { z } from "zod";
+import { zodResolver } from "@hookform/resolvers/zod";
+import { stepThreeSchema } from "@/lib/schemas";
+import { handleFormSubmit } from "./actions";
+import { AddProjectRoutes } from "@/lib/types";
+import { useRouter } from "next/navigation";
+import { FormField, FormItem, FormLabel, FormControl, FormMessage, Form, FormDescription } from "@/components/ui/form"
+import { Input } from "@/components/ui/input";
+import { Button } from "@/components/ui/button";
 import { Checkbox } from "@/components/ui/checkbox";
-import { Label } from "@/components/ui/label";
 
 
 
 export default function StepThreeForm() {
+    const router = useRouter();
+    const form = useForm<z.infer<typeof stepThreeSchema>>({
+        resolver: zodResolver(stepThreeSchema),
+        mode: "onChange",
+        defaultValues: {
+            apiKeyName: "",
+            enabled: true,
+        },
+    });
+
+    async function onSubmit(values: z.infer<typeof stepThreeSchema>) {
+        try {
+            const result = await handleFormSubmit(values);
+
+            if (result.status === "success") {
+                console.log('Result:', values)
+                router.push(AddProjectRoutes.REVIEW);
+            } else {
+                // Handle validation errors - they should be displayed in form fields
+                // The form will automatically show validation errors from Zod
+            }
+        } catch (error) {
+            // Handle unexpected errors
+            console.error("Form submission error:", error);
+            // You could show a toast notification here
+            // toast.error("An unexpected error occurred. Please try again.");
+        }
+    }
+
     return (
-        <form className="flex flex-1 flex-col items-center">
-            <div className="flex flex-col gap-8 w-full lg:max-w-[700px]">
-                <FormInput label="Api key" id="name" type="text" required />
-                <div className="flex flex-col gap-6">
-      <div className="flex items-center gap-3">
-        
-      </div>
-            <Label className="hover:bg-accent/50 flex items-start gap-3 rounded-lg border p-3 has-[[aria-checked=true]]:border-blue-600 has-[[aria-checked=true]]:bg-blue-50 dark:has-[[aria-checked=true]]:border-blue-900 dark:has-[[aria-checked=true]]:bg-blue-950">
-                <Checkbox
-                id="toggle-2"
-                className="data-[state=checked]:border-blue-600 data-[state=checked]:bg-blue-600 data-[state=checked]:text-white dark:data-[state=checked]:border-blue-700 dark:data-[state=checked]:bg-blue-700"
+        <Form {...form}>
+            <form onSubmit={form.handleSubmit(onSubmit)} className="flex flex-col gap-2">
+                <FormField control={form.control} name="apiKeyName" render={({ field }) => (
+                    <FormItem>
+                        <FormLabel>API Key Name</FormLabel>
+                        <FormControl>
+                            <Input {...field} />
+                        </FormControl>
+                        <FormMessage />
+                    </FormItem>
+                )} />
+                <FormField
+                    control={form.control}
+                    name="enabled"
+                    render={({ field }) => (
+                        <FormItem>
+                            <FormLabel>Enable API Key</FormLabel>
+                            <FormControl>
+                                <div className="flex items-center space-x-2">
+                                    <Checkbox
+                                        checked={field.value}
+                                        onCheckedChange={field.onChange}
+                                    />
+                                    <label className="text-sm font-medium leading-none peer-disabled:cursor-not-allowed peer-disabled:opacity-70">
+                                        Enable this API key
+                                    </label>
+                                </div>
+                            </FormControl>
+                            <FormDescription>You can enable or disable this key at any time.</FormDescription>
+                            <FormMessage />
+                        </FormItem>
+                    )}
                 />
-                <div className="grid gap-1.5 font-normal">
-                <p className="text-sm leading-none font-medium">
-                    Status of API KEY (enabled or disabled)
-                </p>
-                <p className="text-muted-foreground text-sm">
-                    You can enable or disable this key at any time.
-                </p>
-                </div>
-            </Label>
-            </div>
-                <SubmitButton text="Submit" />
-            </div>
-        </form>
+                <Button disabled={!form.formState.isValid}>Submit</Button>
+            </form>
+        </Form>
+
     )
 }

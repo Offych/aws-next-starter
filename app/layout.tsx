@@ -3,6 +3,7 @@ import { DM_Sans } from "next/font/google";
 import "./globals.css";
 import { ThemeProvider } from "@/components/theme-provider";
 import Navbar from "@/components/navbar";
+import ErrorBoundary from "@/components/error-boundary";
 
 const dmSans = DM_Sans({
   variable: "--font-sans",
@@ -24,7 +25,8 @@ export default function RootLayout({
       <body
         className={`${dmSans.variable} antialiased`}
       >
-        <ThemeProvider
+        <ErrorBoundary>
+          <ThemeProvider
             attribute="class"
             defaultTheme="system"
             enableSystem
@@ -33,6 +35,7 @@ export default function RootLayout({
             <Navbar />
             {children}
           </ThemeProvider>
+        </ErrorBoundary>
       </body>
     </html>
   );
