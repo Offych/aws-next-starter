@@ -1,8 +1,8 @@
-import { NewProject } from "@/lib/schemas";
+/* import { NewProject } from "@/lib/schemas";
 import { createContext, useState } from 'react';
-import { newProjectInitialValuesType } from "@/lib/schemas";
 
-const defaultProject: newProjectInitialValuesType = {
+
+const defaultProject: {} = {
   projectName: "",
   projectDescription: "",
   team: "",
@@ -21,7 +21,7 @@ const defaultProject: newProjectInitialValuesType = {
 }
 
 type AddProjectContextType = {
-    newProjectData: newProjectInitialValuesType
+    newProjectData: {}
     updateNewProjectDataDetails: (projectDetails: Partial<NewProject>) => void;
     dataLoaded: boolean;
     resetLocalStorage: () => void;
@@ -33,7 +33,7 @@ export const AddProjectContext = createContext<AddProjectContextType | null>(nul
 export const AddProjectContextProvider = ({ children } : { children: React.ReactNode }) => {
     const [newProjectData, setNewProjectData] = useState<newProjectInitialValuesType>(defaultProject)
 
-    return <AddProjectContext.Provider  value={{newProjectData}}>
+    return <AddProjectContext.Provider>
                 {children}
             </AddProjectContext.Provider>
-}
+} */

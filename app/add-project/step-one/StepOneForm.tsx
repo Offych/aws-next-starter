@@ -1,11 +1,10 @@
 'use client';
 
-//import SubmitButton from "@/components/submit-button";
 import { Textarea } from "@/components/ui/textarea";
 import { useForm } from "react-hook-form";
 import { z } from "zod";
 import { zodResolver } from "@hookform/resolvers/zod";
-import { stepOneSchema, EnvironmentEnum } from "@/lib/schemas";
+import { stepOneSchema } from "@/lib/schemas";
 import { handleFormSubmit } from "./actions";
 import { AddProjectRoutes } from "@/lib/types";
 import { useRouter } from "next/navigation";
