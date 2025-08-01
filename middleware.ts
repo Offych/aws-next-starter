@@ -72,8 +72,8 @@ const getSecurityHeaders = (request: NextRequest) => {
             // More permissive CSP for development
             'Content-Security-Policy': [
                 "default-src 'self'",
-                "script-src 'self' 'unsafe-eval' 'unsafe-inline'",
-                "style-src 'self' 'unsafe-inline'",
+/*                 "script-src 'self' 'unsafe-eval' 'unsafe-inline'",
+                "style-src 'self' 'unsafe-inline'", */
                 "img-src 'self' data: https:",
                 "font-src 'self'",
                 "connect-src 'self'",
