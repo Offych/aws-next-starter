@@ -50,8 +50,8 @@ const getSecurityHeaders = (request: NextRequest) => {
             // Content Security Policy (stricter in production)
             'Content-Security-Policy': [
                 "default-src 'self'",
-                "script-src 'self'", // Removed unsafe-eval and unsafe-inline for production
-                "style-src 'self'" , //  'unsafe-inline'"Keep unsafe-inline for Tailwind
+                "script-src 'self' 'unsafe-inline'", // Allow inline scripts for Next.js
+                "style-src 'self' 'unsafe-inline'", // Keep unsafe-inline for Tailwind
                 "img-src 'self' data: https:",
                 "font-src 'self'",
                 "connect-src 'self'",
@@ -72,8 +72,8 @@ const getSecurityHeaders = (request: NextRequest) => {
             // More permissive CSP for development
             'Content-Security-Policy': [
                 "default-src 'self'",
-/*                 "script-src 'self' 'unsafe-eval' 'unsafe-inline'",
-                "style-src 'self' 'unsafe-inline'", */
+                "script-src 'self' 'unsafe-eval' 'unsafe-inline'",
+                "style-src 'self' 'unsafe-inline'",
                 "img-src 'self' data: https:",
                 "font-src 'self'",
                 "connect-src 'self'",
