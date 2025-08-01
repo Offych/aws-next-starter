@@ -3,6 +3,7 @@ import { DM_Sans } from "next/font/google";
 import "./globals.css";
 import { ThemeProvider } from "@/components/theme-provider";
 import Navbar from "@/components/navbar";
+import { Toaster } from "@/components/ui/sonner";
 //import ErrorBoundary from "@/components/error-boundary";
 
 const dmSans = DM_Sans({
@@ -34,6 +35,7 @@ export default function RootLayout({
           >
             <Navbar />
             {children}
+            <Toaster />
           </ThemeProvider>
 {/*         </ErrorBoundary> */}
       </body>

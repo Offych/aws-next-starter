@@ -13,6 +13,7 @@ import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@
 import { Checkbox } from "@/components/ui/checkbox";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { handleProjectFormSubmit } from "./actions";
+import { toast } from "sonner";
 
 const prefilledValues: z.infer<typeof newProjectSchema> = {
     projectName: "Api Key Test",
@@ -100,6 +101,12 @@ export default function UnifiedProjectForm() {
 
            if (result.status === "success") {
             console.log('Result:', values)
+            toast.success("Project created successfully", {
+                duration: 2000,
+                position: 'bottom-center',
+                richColors: true
+            }
+            );
             router.push('/dashboard');
           } else {
             // Handle validation errors - they should be displayed in form fields
