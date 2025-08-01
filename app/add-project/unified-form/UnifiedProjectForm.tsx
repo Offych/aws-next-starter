@@ -14,7 +14,7 @@ import { Checkbox } from "@/components/ui/checkbox";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { handleProjectFormSubmit } from "./actions";
 
-const prefilledValues = {
+const prefilledValues: z.infer<typeof newProjectSchema> = {
     projectName: "Api Key Test",
     team: "Test Team",
     link: "https://example.com",
