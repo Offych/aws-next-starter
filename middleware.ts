@@ -51,9 +51,9 @@ const getSecurityHeaders = (request: NextRequest) => {
             'Content-Security-Policy': [
                 "default-src 'self'",
                 "script-src 'self' 'unsafe-inline'", // Allow inline scripts for Next.js
-                "style-src 'self' 'unsafe-inline'", // Keep unsafe-inline for Tailwind
+                "style-src 'self' 'unsafe-inline' https://fonts.googleapis.com", // Allow Google Fonts
                 "img-src 'self' data: https:",
-                "font-src 'self'",
+                "font-src 'self' https://fonts.gstatic.com", // Allow Google Fonts
                 "connect-src 'self'",
                 "media-src 'self'",
                 "object-src 'none'",
@@ -73,9 +73,9 @@ const getSecurityHeaders = (request: NextRequest) => {
             'Content-Security-Policy': [
                 "default-src 'self'",
                 "script-src 'self' 'unsafe-eval' 'unsafe-inline'",
-                "style-src 'self' 'unsafe-inline'",
+                "style-src 'self' 'unsafe-inline' https://fonts.googleapis.com",
                 "img-src 'self' data: https:",
-                "font-src 'self'",
+                "font-src 'self' https://fonts.gstatic.com",
                 "connect-src 'self'",
                 "media-src 'self'",
                 "object-src 'none'",
