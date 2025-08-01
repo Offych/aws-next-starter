@@ -19,12 +19,12 @@ export default function Navbar() {
             <Link href="/dashboard"
               className="text-muted-foreground hover:text-foreground transition-colors px-2 
               py-1 rounded-md font-medium">Dashboard Page</Link>
-            <Link href="/not-found"
+            {/* <Link href="/not-found"
               className="text-muted-foreground hover:text-foreground transition-colors px-2 
-              py-1 rounded-md font-medium">404 page</Link>
-            <Link href="/add-project/step-one"
+              py-1 rounded-md font-medium">404 page</Link> */}
+            <Link href="/add-project"
               className="text-muted-foreground hover:text-foreground transition-colors px-2 
-              py-1 rounded-md font-medium">Project Form</Link>
+              py-1 rounded-md font-medium">Add Project</Link>
           </div>
         </div>
         <div className="flex items-center gap-1 text-sm">

@@ -90,10 +90,10 @@ export function buildCSP(options: {
     allowExternalImages?: string[];
 } = {}) {
     const {
-        allowInlineScripts = false,
+/*         allowInlineScripts = false,
         allowEval = false,
         allowExternalScripts = [],
-        allowExternalStyles = [],
+        allowExternalStyles = [], */
         allowExternalImages = [],
     } = options;
 
