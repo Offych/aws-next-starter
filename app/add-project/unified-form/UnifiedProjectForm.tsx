@@ -63,7 +63,7 @@ export default function UnifiedProjectForm() {
 
     const form = useForm<z.infer<typeof newProjectSchema>>({
         resolver: zodResolver(newProjectSchema),
-        mode: "onChange",
+        mode: 'all',
         defaultValues: {
             // Step One - Project Information
             projectName: "",
