@@ -99,8 +99,8 @@ export function buildCSP(options: {
 
     const directives = [
         "default-src 'self'",
-        `script-src 'self'${allowInlineScripts ? " 'unsafe-inline'" : ""}${allowEval ? " 'unsafe-eval'" : ""}${allowExternalScripts.length > 0 ? ` ${allowExternalScripts.join(' ')}` : ""}`,
-        `style-src 'self'${allowInlineScripts ? " 'unsafe-inline'" : ""}${allowExternalStyles.length > 0 ? ` ${allowExternalStyles.join(' ')}` : ""}`,
+       /*  `script-src 'self'${allowInlineScripts ? " 'unsafe-inline'" : ""}${allowEval ? " 'unsafe-eval'" : ""}${allowExternalScripts.length > 0 ? ` ${allowExternalScripts.join(' ')}` : ""}`,
+        `style-src 'self'${allowInlineScripts ? " 'unsafe-inline'" : ""}${allowExternalStyles.length > 0 ? ` ${allowExternalStyles.join(' ')}` : ""}`, */
         `img-src 'self' data:${allowExternalImages.length > 0 ? ` ${allowExternalImages.join(' ')}` : ""}`,
         "font-src 'self'",
         "connect-src 'self'",

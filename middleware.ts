@@ -51,7 +51,7 @@ const getSecurityHeaders = (request: NextRequest) => {
             'Content-Security-Policy': [
                 "default-src 'self'",
                 "script-src 'self'", // Removed unsafe-eval and unsafe-inline for production
-                "style-src 'self' 'unsafe-inline'", // Keep unsafe-inline for Tailwind
+                "style-src 'self'" , //  'unsafe-inline'"Keep unsafe-inline for Tailwind
                 "img-src 'self' data: https:",
                 "font-src 'self'",
                 "connect-src 'self'",
