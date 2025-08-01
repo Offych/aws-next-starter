@@ -77,12 +77,15 @@ export const stepTwoSchema = z.object({
 });
 
 export const stepThreeSchema = z.object({
-    apiKeyName: z.string()
-        .min(1, { message: "API key name is required" })
+    apiKeyValue: z.array(z.string().min(1, { message: "API key name is required" })
         .max(50, { message: "API key name must be at most 50 characters" })
-        .transform(sanitizeString),
-    enabled: z.boolean(),
-});
+        .transform(sanitizeString))
+        .max(6, 'Maximum 6 Api keys allowed...')
+        .refine((keys) => new Set(keys.map(e => e.toLowerCase())).size === keys.length, 
+            {message: 'Api Key Value must be unique'}),
+        enabled: z.boolean()
+    });
+
 
 // Combined schema for the entire project
 export const newProjectSchema = z.object({

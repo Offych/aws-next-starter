@@ -3,7 +3,7 @@
 import { useForm } from "react-hook-form";
 import { z } from "zod";
 import { zodResolver } from "@hookform/resolvers/zod";
-import { newProjectSchema } from "@/lib/schemas";
+import { NewProject, newProjectSchema } from "@/lib/schemas";
 import { useRouter } from "next/navigation";
 import { FormField, FormItem, FormLabel, FormControl, FormMessage, Form, FormDescription, FormFieldWithValidation } from "@/components/ui/form";
 import { Input } from "@/components/ui/input";
@@ -14,8 +14,9 @@ import { Checkbox } from "@/components/ui/checkbox";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { handleProjectFormSubmit } from "./actions";
 import { toast } from "sonner";
+import { useState } from "react";
 
-const prefilledValues: z.infer<typeof newProjectSchema> = {
+const prefilledValues: NewProject = {
     projectName: "Api Key Test",
     team: "Test Team",
     link: "https://example.com",
@@ -34,7 +35,7 @@ const prefilledValues: z.infer<typeof newProjectSchema> = {
     }),
     priceMlnInput: "0.00",
     priceMlnOutput: "0.00",
-    apiKeyName: "8d8dc0f9-98f7-4fe3-b442-83865105519c",
+    apiKeyValue: ["8d8dc0f9-98f7-4fe3-b442-83865105519c"],
     enabled: true,
 
 }
@@ -42,6 +43,23 @@ const prefilledValues: z.infer<typeof newProjectSchema> = {
 
 export default function UnifiedProjectForm() {
     const router = useRouter();
+    const [apiKeyValue, setApiKeyValueField] = useState<number[]>([0]);
+
+    const addApiKeyValueField = () => {
+        if(apiKeyValue.length < 6) {
+            const newApiKeyValue = [...form.getValues('apiKeyValue'), ''];
+            form.setValue('apiKeyValue', newApiKeyValue);
+            setApiKeyValueField((prev) => [...prev, prev.length]);
+        }
+    }
+
+    const removeApiKeyValueField = (index: number) => {
+        if (apiKeyValue.length === 1) return;
+        const apiKeyValueToRemove = form.getValues('apiKeyValue').filter((_, i) => i !== index);
+        form.setValue('apiKeyValue', apiKeyValueToRemove)
+        setApiKeyValueField((prev) => prev.filter((_, i) => i !== index))
+    }
+
 
     const form = useForm<z.infer<typeof newProjectSchema>>({
         resolver: zodResolver(newProjectSchema),
@@ -67,7 +85,7 @@ export default function UnifiedProjectForm() {
             priceMlnOutput: "",
 
             // Step Three - API Configuration
-            apiKeyName: "",
+            apiKeyValue: [""],
             enabled: true,
         },
     });
@@ -470,29 +488,32 @@ export default function UnifiedProjectForm() {
                 {/* Step Three - API Configuration */}
                 <Card>
                     <CardHeader>
-                        <CardTitle>API Configuration</CardTitle>
-                        <CardDescription>API key settings and configuration</CardDescription>
+                        <CardTitle>API Keys Data</CardTitle>
+                        <CardDescription>API key values</CardDescription>
                     </CardHeader>
                     <CardContent className="space-y-4">
-                        <FormField
-                            control={form.control}
-                            name="apiKeyName"
-                            render={({ field, fieldState }) => (
-                                <FormItem>
-                                    <FormLabel>API Key Name</FormLabel>
-                                    <FormFieldWithValidation
-                                        isValid={field.value.length >= 1 && !fieldState.error}
-                                        showValidation={field.value.length > 0}
-                                    >
-                                        <FormControl>
-                                            <Input {...field} placeholder="Enter API key name" />
-                                        </FormControl>
-                                    </FormFieldWithValidation>
-                                    <FormMessage />
-                                </FormItem>
-                            )}
-                        />
-
+                        {apiKeyValue.map((_, index) => (
+                            <FormField
+                                key={index}
+                                control={form.control}
+                                name={`apiKeyValue.${index}`}
+                                render={({ field  }) => (
+                                    <FormItem>
+                                        <FormLabel>API Key Value</FormLabel>
+                                            <FormControl>
+                                                <Input {...field} placeholder="Enter API key value" />
+                                            </FormControl>
+                                        {apiKeyValue.length > 1 && (
+                                            <Button onClick={() => removeApiKeyValueField(index)}>Remove Value</Button>     
+                                         )}        
+                                        <FormMessage />
+                                    </FormItem>
+                                )}
+                                
+                            > 
+                            </FormField>
+                        ))}
+                            <Button onClick={addApiKeyValueField}>Add Api key Value</Button>  
                         <FormField
                             control={form.control}
                             name="enabled"
